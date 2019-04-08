@@ -1,0 +1,320 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Floor Plan</title>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/MixedUseProperty.js"></script>
+
+    <script type="text/javascript">
+        function GetURL() {
+            myMastUrl.AddProperty = '@Url.Action("AddProperty", "Property")'
+            myMastUrl.AddSite = '@Url.Action("AddSite", "Property")'
+
+        }
+    </script>
+
+</head>
+<body>
+    <div class="panel panel-info" id="EngFmyMastMain" style="margin-bottom:60px !important;">
+        <div class="panel-heading" id="EngFmyMast">
+            Residents Master
+        </div>
+        <div class="panel-body">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12" style="border: solid red 0px;">
+                        <form class="form-horizontal" action="" method="post" id="frmNewEngineFamilyModel">
+                            <div class="col-xs-12 col-md-12 form-group">
+                                <div class="col-xs-6 col-md-5">
+                                    <label class="col-xs-3 col-md-4 control-label">Property Name </label>
+                                    <div class="col-xs-3">
+                                        <select>
+                                            <option>Select</option>
+                                            <option>Greystar Real Estate Partners</option>
+                                            <option>Riverstone Residential Group</option>
+                                            <option>Lincoln Property Company</option>
+                                            <option>Pinnacle</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-16">
+                                    <label class="col-sm-3 control-label">Select Site</label>
+                                    <div class="col-xs-4">
+                                        <select>
+                                            <option>Select</option>
+                                            <option>
+                                                432 Park Avenue
+                                            </option>
+                                            <option>220 Central Park South</option>
+                                            <option>111 Murray Street</option>
+                                            
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="col-xs-12 col-md-12 form-group">
+                                <div class="col-xs-6 col-md-5">
+                                    <label class="col-xs-3 col-md-4 control-label">Resident Name </label>
+                                    <div class="col-xs-3">
+                                        <input type="text" value=" " />
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-16">
+                                    <label class="col-sm-3 control-label">Select Unit </label>
+                                    <div class="col-xs-4">
+                                        <select>
+                                            <option>Select</option>
+                                            <option>Bldg1</option>
+                                            <option>Bldg2</option>
+                                            <option>Bldg3</option>
+                                            <option>Bldg4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="col-xs-12 col-md-12 form-group">
+                                <div class="col-xs-6 col-md-5">
+                                    <label class="col-xs-3 col-md-4 control-label">No of Occupants </label>
+                                    <div class="col-xs-3">
+                                        <input type="text" value=" " />
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-16">
+                                    <label class="col-sm-3 control-label">Occupant Names</label>
+                                    <div class="col-xs-4">
+                                        <input type="text" value=" " />
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="col-xs-12 col-md-12 form-group">
+                                <div class="col-xs-6 col-md-5">
+                                    <label class="col-xs-3 col-md-4 control-label">Have pets? </label>
+                                    <div class="col-xs-3">
+                                        <input type="checkbox" value=" " />
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-16">
+                                    <label class="col-sm-3 control-label">Pet Details</label>
+                                    <div class="col-xs-4">
+                                        <input type="text" value=" " />
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="col-xs-12 col-md-12 form-group">
+                                <div class="col-xs-6 col-md-5">
+                                    <label class="col-xs-3 col-md-4 control-label">Move In Date: </label>
+                                    <div class="col-xs-3">
+                                        <input type="date" value=" " />
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-16">
+                                    <label class="col-sm-3 control-label">Move Out Date</label>
+                                    <div class="col-xs-4">
+                                        <input type="text" value=" " />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br />
+                            <div class="col-xs-12 col-md-12 form-group">
+                                <div class="col-xs-6 col-md-5">
+                                    <label class="col-xs-3 col-md-4 control-label">Lease Start Date </label>
+                                    <div class="col-xs-3">
+                                        <input type="date" value=" " />
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-16">
+                                    <label class="col-sm-3 control-label">Lease End Date</label>
+                                    <div class="col-xs-4">
+                                        <input type="date" value=" " />
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="col-xs-12 col-md-12 form-group">
+                                <div class="col-xs-6 col-md-5">
+                                    <label class="col-xs-3 col-md-4 control-label">Phone No </label>
+                                    <div class="col-xs-3">
+                                        <input type="tel" value=" " />
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-16">
+                                    <label class="col-sm-3 control-label">Email ID: </label>
+                                    <div class="col-xs-4">
+                                        <input type="text" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-12 form-group"></div>
+
+                            <div class="col-xs-12 col-md-12">
+                                <div class="col-xs-6 col-md-5">
+                                    <input type="button" class="form-group col-md-6 btn btn-default" data-dismiss="modal" value="Close" title="Close"
+                                           id="btnFrmClose" />
+                                </div>
+                                <div class="col-xs-6 col-md-5">
+                                    <input type="button" id="btnAddVariable" value="Add" class="form-group col-md-6 btn btn-primary" title="Add Property" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive col-md-12">
+                <table id="dtFloorData" class="display table table-striped table-bordered dt-responsive nowrap no-footer dtr-inline dataTable" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                Property Name
+                            </th>
+                            <th>
+                                Site Name
+                            </th>
+                            <th>
+                                Resident Name
+                            </th>
+                            <th>
+                                Phone No
+                            </th>
+                            <th>
+                                Email ID
+                            </th>
+                            <th>
+                                Lease Start Date
+                            </th>
+                            <th>
+                                Lease End Date
+                            </th>
+                            <th>
+                                Move In Date
+                            </th>
+                            <th>
+                                Move Out Date
+                            </th>
+                            <th>
+                                Unit No
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                            <th>
+                                Edit
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (MixedUseProperty.Models.MixProperty.dtResident != null)
+                        {
+                            if (MixedUseProperty.Models.MixProperty.dtResident.Rows.Count > 0)
+                            {
+                                foreach (System.Data.DataRow row in MixedUseProperty.Models.MixProperty.dtResident.Rows)
+                                {
+                                    <tr>
+                                        @foreach (System.Data.DataColumn col in MixedUseProperty.Models.MixProperty.dtResident.Columns)
+                                        {
+                                            if (col.DataType == Type.GetType("System.Boolean"))
+                                            {
+                                                <td>
+                                                    @{
+                                                        bool val = Convert.ToBoolean(@row[col.ColumnName]);
+                                                    }
+                                                    @Html.CheckBox("Vote", val)
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    @row[col.ColumnName]
+                                                </td>
+                                            }
+                                        }
+                                        <td>
+                                            Edit
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+
+                </table>
+                <!-- Add Engine Family Model Popup Start /-->
+                <div class="modal fade" id="NewEngineFamily" tabindex="-1" role="dialog" aria-labelledby="NewEngineFamilyLabel"
+                     data-backdrop="static" data-keyboard="false">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="Close"
+                                        id="iconFrmClose">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title" id="NewTurnabckLabel">
+                                    Add Property
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-12" style="border: solid red 0px;">
+                                        <form class="form-horizontal" action="" method="post" id="frmNewEngineFamilyModel">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Property Name </label>
+                                                <div class="col-xs-7">
+                                                    <input type="text" value="" class="form-control" id="txtPropName">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Property Code </label>
+                                                <div class="col-xs-7">
+                                                    <input type="text" value="" class="form-control" id="txtPropCode">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Property Address </label>
+                                                <div class="col-xs-7">
+                                                    <input type="text" value="" class="form-control" id="txtPropAddress">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Property representative </label>
+                                                <div class="col-xs-7">
+                                                    <input type="text" value="" class="form-control" id="txtProprep">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Email </label>
+                                                <div class="col-xs-7">
+                                                    <input type="text" value="" class="form-control" id="txtEmail">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <input type="button" class="btn btn-default" data-dismiss="modal" value="Close" title="Close"
+                                                       id="btnFrmClose" />
+                                                <input type="button" id="btnAddProperty" value="Add" class="btn btn-primary"
+                                                       title="Add Property" />
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

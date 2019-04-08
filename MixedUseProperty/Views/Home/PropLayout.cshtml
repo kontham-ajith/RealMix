@@ -1,0 +1,109 @@
+﻿@model MixedUseProperty.Models.MixProperty
+
+<br />
+
+<h3>Property Name : @ViewBag.PropName</h3>
+<div class="col-xs-12">
+
+    <fieldset>
+        <div style="border:1px solid black;text-align:center;">
+            <br />
+            @{int NoofSites = ViewBag.SiteCnt;
+                int Cnt = 0;
+                string[] SiteNames = { "432 Park Avenue", "30 Hudsun Yards", "Bank of America Plaza", "70 Pine Street", "220 Central Park South", "56 Leonard Street" };
+
+                if (SiteNames.Length > 5)
+                {
+
+                    int cnt = 0;
+                    for (int j = 6; j < NoofSites; j++)
+                    {
+                        cnt += 1;
+                        Array.Resize(ref SiteNames, SiteNames.Length + 1);
+                        SiteNames[j]="Site" + cnt;
+                    }
+                }
+             }
+            
+            @for (int i = 0; i < NoofSites; i++)
+            {
+                if (NoofSites % 4 != 0)
+                {
+                    Cnt = NoofSites % 4;
+                }
+                else
+                {
+                    Cnt = 4;
+                }
+                decimal width = 1000 / Cnt;
+                decimal height = NoofSites>10 ? 250/Cnt: 250 / NoofSites;
+
+
+                <svg width="@width" height="@height">
+                    <a xlink:href="@Url.Action("SiteLayout", "Home")">
+                        <rect width="100%" height="100%" style="fill:blue;stroke-width:3;stroke:rgb(0,0,0)" />
+                        <text x="30%" y="50%" fill="white">@SiteNames[i]</text>
+                    </a>
+                </svg>
+            }
+
+        </div>
+    </fieldset>
+
+
+
+
+    <script type="text/javascript">
+
+    function fnDisplayFloorPlan(propid, siteid) {
+
+        $.ajax({
+            url: '@Url.Action("GetFloorDetails", "Home")',
+            data: JSON.stringify({ propid: propid, siteid: siteid }),
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (xhr, er, error) {
+
+            }
+
+
+        })
+    }
+    function fnReadSites(ddl) {
+
+        var PropID = ddl.value;
+        if (PropID == "") {
+            location.href = "Home\\NoLayout";
+        } else {
+            location.href = "Home\\PropLayout"
+        }
+
+        var options = "";
+        $.ajax({
+            url: '@Url.Action("GetSites", "Home")',
+            data: JSON.stringify({ PropID:PropID }),
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                NoofSites= data.mixes.length-1
+                for (var i = 0; i < data.mixes.length; i++) {
+
+                    options += "<option value = " + data.mixes[i].strSiteId + ">" + data.mixes[i].strSiteName + "</option>";
+                }
+
+                $('#Siteddl').html(options);
+            },
+            error: function (xhr, er, error) {
+
+            }
+        });
+
+    }
+
+    </script>
+
+    <div style="text-align:right;">
+        <a href="javascript:history.back()">Go Back</a>
+    </div>

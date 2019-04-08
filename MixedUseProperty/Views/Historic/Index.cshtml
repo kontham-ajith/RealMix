@@ -1,0 +1,235 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Floor Plan</title>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/MixedUseProperty.js"></script>
+    <script src="~/Scripts/chart-2.7.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+
+        th {
+            color: white;
+        }
+
+        .panel-info {
+            border-color: #293f50 !important;
+        }
+    </style>
+    <script type="text/javascript">
+        function GetURL() {
+            myMastUrl.AddProperty = '@Url.Action("AddProperty", "Property")'
+            myMastUrl.AddSite = '@Url.Action("AddSite", "Property")'
+        }
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+</head>
+<body>
+    <div class="panel panel-info" id="EngFmyMastMain" style="margin-bottom:60px !important;">
+        <div class="panel-heading" id="EngFmyMast" style="text-align:center;background:#293f50;color: white;">
+            <b>Current vs Historic Space Usage</b>
+        </div>
+        <div class="panel-body" style="border-style: solid; border-color: #293f50;">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12" style="border: solid red 0px;">
+                        <form class="form-horizontal" action="" method="post" id="frmNewEngineFamilyModel">
+                            <div class="col-xs-12 col-md-12 form-group">
+                                <div class="col-xs-6 col-md-5">
+                                    <label class="col-xs-3 col-md-4 control-label">Property Name </label>
+                                    <div class="col-xs-3">
+                                        <select>
+                                            <option>Select</option>
+                                            <option>Greystar Real Estate Partners</option>
+                                            <option>Riverstone Residential Group</option>
+                                            <option>Lincoln Property Company</option>
+                                            <option>Pinnacle</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-16">
+                                    <label class="col-sm-3 control-label">Select Site </label>
+                                    <div class="col-xs-4">
+                                        <select>
+                                            <option>Select</option>
+                                            <option>432 Park Avenue</option>
+                                            <option>220 Central Park South</option>
+                                            <option>111 Murray Street</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="histroic" class="form-group">
+                    <table id="example" class="display" style="width:100%">
+                        <thead style="background: linear-gradient(to bottom, #ff6600 0%, #ff9933 100%);">
+                            <tr>
+                                <th rowspan="2">Unit</th>
+                                <th colspan="4" align="center" style="text-align: center;"><b>Current</b></th>
+                                <th colspan="5" align="center" style="text-align: center;">Historic</th>
+                            </tr>
+                            <tr>
+                                <th>Spaces</th>
+                                <th>Sft</th>
+                                <th>Total Cost</th>
+                                <th>From date</th>
+                                <th>Spaces</th>
+                                <th>Sft</th>
+                                <th>Total Cost</th>
+                                <th>From date</th>
+                                <th>To date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Retail</td>
+                                <td>2500</td>
+                                <td>22500</td>
+                                <td>12/5/2018</td>
+                                <td>Office</td>
+                                <td>2500</td>
+                                <td>20000</td>
+                                <td>12/5/2016</td>
+                                <td>12/5/2017</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Retail</td>
+                                <td>4500</td>
+                                <td>31500</td>
+                                <td>3/7/2018</td>
+                                <td>Hotel</td>
+                                <td>4500</td>
+                                <td>30000</td>
+                                <td>3/7/2016</td>
+                                <td>5/17/2017</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Hotel</td>
+                                <td>3000</td>
+                                <td>30000</td>
+                                <td>4/13/2018</td>
+                                <td>Office</td>
+                                <td>3000</td>
+                                <td>24000</td>
+                                <td>4/13/2016</td>
+                                <td>4/25/2017</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Apartment</td>
+                                <td>6000</td>
+                                <td>48000</td>
+                                <td>6/8/2018</td>
+                                <td>Apartment</td>
+                                <td>6000</td>
+                                <td>48000</td>
+                                <td>6/8/2016</td>
+                                <td>NA</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    @*le id="example" class="display" style="width:100%" >
+                            <thead style="background: linear-gradient(to bottom, #ff6600 0%, #ff9933 100%);">
+                                <tr>
+                                    <th rowspan="2">Unit</th>
+                                    <th colspan="3" align="center" style="text-align: center;"><b>Current</b></th>
+                                    <th colspan="3" align="center" style="text-align: center;">Historic</th>
+                                </tr>
+                                <tr>
+                                    <th>Spaces</th>
+                                    <th>Sft</th>
+                                    <th>Total Cost</th>
+                                    <th>Spaces</th>
+                                    <th>Sft</th>
+                                    <th>Total Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Apartment</td>
+                                    <td>2546</td>
+                                    <td>200000</td>
+                                    <td>Office</td>
+                                    <td>4000</td>
+                                    <td>500000</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Apartment</td>
+                                    <td>1546</td>
+                                    <td>300000</td>
+                                    <td>Office</td>
+                                    <td>3500</td>
+                                    <td>500000</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Apartment</td>
+                                    <td>2246</td>
+                                    <td>200000</td>
+                                    <td>Office</td>
+                                    <td>4000</td>
+                                    <td>500000</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Apartment</td>
+                                    <td>2546</td>
+                                    <td>200000</td>
+                                    <td>Office</td>
+                                    <td>4000</td>
+                                    <td>500000</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Apartment</td>
+                                    <td>2046</td>
+                                    <td>200000</td>
+                                    <td>Office</td>
+                                    <td>4000</td>
+                                    <td>500000</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Apartment</td>
+                                    <td>2546</td>
+                                    <td>200000</td>
+                                    <td>Office</td>
+                                    <td>4000</td>
+                                    <td>500000</td>
+                                </tr>
+                            </tbody>
+
+                        </table>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,89 @@
+﻿@model MixedUseProperty.Models.MixProperty
+<p> </p>
+<fieldset>
+
+    <div class="col-xs-12">
+        <input type="hidden" name="flg" value="0" />
+      <script>
+          var NoofSites = 0;
+      </script>
+
+        <div class="col-xs-5">
+            <label for="Propddl">Select Property:</label>
+
+            <select class="form-control" id="Propddl" onchange="fnReadSites(this)">
+                <option value="">--Select--</option>
+                @for (int i = 0; i < ViewBag.Prop.Count; i++)
+                {
+                    <option value="@ViewBag.Prop[i].strPropID">@ViewBag.Prop[i].strPropName</option>
+                }
+
+            </select>
+
+        </div>
+
+
+    </div>
+
+</fieldset>
+
+<br />
+<br />
+
+
+<script type="text/javascript">
+
+    function fnDisplayFloorPlan(propid, siteid) {
+
+        $.ajax({
+            url: '@Url.Action("GetFloorDetails", "Home")',
+            data: JSON.stringify({ propid: propid, siteid: siteid }),
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (xhr, er, error) {
+
+            }
+
+
+        })
+    }
+    function fnReadSites(ddl) {
+
+        var PropID = ddl.value;
+        
+        var PropName = ddl.options[ddl.selectedIndex].text;
+        
+        var options = "";
+        var NoofSites = 0;
+        $.ajax({
+            url: '@Url.Action("GetSites", "Home")',
+            async: false,
+            data: JSON.stringify({ PropID:PropID }),
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                
+                NoofSites = data.Cnt;
+               
+               // for (var i = 0; i < data.mixes.length; i++) {
+                //    NoofSites += 1;
+                  //  options += "<option value = " + data.mixes[i].strSiteId + ">" + data.mixes[i].strSiteName + "</option>";
+                //}
+
+              //  $('#Siteddl').html(options);
+            },
+            error: function (xhr, er, error) {
+
+            }
+        });
+        if (PropID == "") {
+            location.href = "Home\\NoLayout?SiteCnt=" + NoofSites + "&PropName=" + PropName;
+        } else {
+            location.href = "Home\\PropLayout?SiteCnt=" + NoofSites + "&PropName=" + PropName;
+        }
+
+    }
+
+</script>

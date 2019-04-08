@@ -1,0 +1,245 @@
+﻿
+@model MixedUseProperty.Models.MixProperty
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Floor Plan</title>
+    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+        <script src="~/Content/MIX/jquery.min.js"></script>
+        <script src="~/Content/MIX/dataTables.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>*@
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/MixedUseProperty.js"></script>
+
+    <script type="text/javascript">
+        function GetURL() {
+            myMastUrl.AddProperty = '@Url.Action("AddProperty", "Property")'
+            myMastUrl.AddSite = '@Url.Action("AddSite", "Property")'
+            
+        }
+    </script>
+
+</head>
+<body>
+    <div class="panel panel-info" id="EngFmyMastMain" style="margin-bottom:60px !important;">
+        <div class="panel-heading" id="EngFmyMast">
+            Property Master
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive col-md-12">
+                <div style="margin-bottom: 5px;" class="AddNewUserDiv pull-left">
+                    <a class="btn btn-success" data-toggle="modal" data-target="#NewEngineFamily" title="Add New Engine Family">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </div>
+                <table id="dtFloorData" class="display table table-striped table-bordered dt-responsive nowrap no-footer dtr-inline dataTable" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                PropertyID
+                            </th>
+                            <th>
+                                Property Name
+                            </th>
+                            <th>
+                                Property Code
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Property representative
+                            </th>
+                            <th>
+                                Created By
+                            </th>
+                            <th>
+                                Created Date
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (MixedUseProperty.Models.MixProperty.dtProperty.Rows.Count > 0)
+                        {
+                            foreach (System.Data.DataRow row in MixedUseProperty.Models.MixProperty.dtProperty.Rows)
+                            {
+                                <tr>
+                                    @foreach (System.Data.DataColumn col in MixedUseProperty.Models.MixProperty.dtProperty.Columns)
+                                    {
+                                        if (col.DataType == Type.GetType("System.Boolean"))
+                                        {
+                                            <td>
+                                                @{
+                                                    bool val = Convert.ToBoolean(@row[col.ColumnName]);
+                                                }
+                                                @Html.CheckBox("Vote", val)
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                @row[col.ColumnName]
+                                            </td>
+                                        }
+                                    }
+                                    <td>
+                                        Edit
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+
+                </table>
+                <!-- Add Engine Family Model Popup Start /-->
+                <div class="modal fade" id="NewEngineFamily" tabindex="-1" role="dialog" aria-labelledby="NewEngineFamilyLabel"
+                     data-backdrop="static" data-keyboard="false">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="Close"
+                                        id="iconFrmClose">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title" id="NewTurnabckLabel">
+                                    Add Property
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-12" style="border: solid red 0px;">
+                                        <form class="form-horizontal" action="" method="post" id="frmNewEngineFamilyModel">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Property Name </label>
+                                                <div class="col-xs-7">
+                                                    <input type="text" value="" class="form-control" id="txtPropName">
+                                                </div>
+                                            </div>                                          
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Property Code </label>
+                                                <div class="col-xs-7">
+                                                    <input type="text" value="" class="form-control" id="txtPropCode">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Property Address </label>
+                                                <div class="col-xs-7">
+                                                    <input type="text" value="" class="form-control" id="txtPropAddress">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Property representative </label>
+                                                <div class="col-xs-7">
+                                                    <input type="text" value="" class="form-control" id="txtProprep">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Email </label>
+                                                <div class="col-xs-7">
+                                                    <input type="text" value="" class="form-control" id="txtEmail">
+                                                </div>
+                                            </div>                                          
+                                            @*<div class="form-group" id="SiteCeration" style="display:none">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Site Name </label>
+                                                    <div class="col-xs-7">
+                                                        <input type="text" value="" class="form-control" id="txtSiteName">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Site Code </label>
+                                                    <div class="col-xs-7">
+                                                        <input type="text" value="" class="form-control" id="txtSiteCode">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" >
+                                                    <label class="col-sm-6 control-label">Site Address Same as Property Address </label>
+                                                    <div class="col-xs-3">
+                                                        <input type="radio" name="gender" value="Yes" checked> Yes  
+                                                        <input type="radio" name="gender" value="No"> No
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" id="siteAddress" style="display:none">
+                                                    <label class="col-sm-3 control-label">Site Address Same as Property Address </label>
+                                                    <div class="col-xs-7">
+                                                        <textarea id="siteAddress"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" id="divspace">
+                                                    <label class="col-sm-3 control-label">Space </label>
+                                                    <div class="col-xs-7">
+                                                        @if (MixedUseProperty.Models.MixProperty.dtSpace != null)
+                                                        {
+                                                            foreach (System.Data.DataRow row in MixedUseProperty.Models.MixProperty.dtSpace.Rows)
+                                                            {
+                                                                <input type="checkbox" name="vehicle1" value=@row[1]>@row[1]
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            
+                                                        }
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">No. of floors</label>
+                                                    <div class="col-xs-7">
+                                                        <input type="text" value="" class="form-control" id="txtNoofFloors">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="h5 col-sm-12">
+                                                        Site representative
+
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">Name</label>
+                                                            <div class="col-xs-7">
+                                                                <input type="text" value="" class="form-control" id="txtsiteRepName">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">Email</label>
+                                                            <div class="col-xs-7">
+                                                                <input type="text" value="" class="form-control" id="txtsiteRepEmail">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">                                                           
+                                                            <div class="col-xs-7">
+                                                                <input type="button" id="btnAddSite" value="Add Site" class="btn btn-primary"
+                                                                       title="Add Site" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>*@
+                                            <div class="modal-footer">
+                                                <input type="button" class="btn btn-default" data-dismiss="modal" value="Close" title="Close"
+                                                       id="btnFrmClose" />
+                                                <input type="button" id="btnAddProperty" value="Add" class="btn btn-primary"
+                                                       title="Add Property" />
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

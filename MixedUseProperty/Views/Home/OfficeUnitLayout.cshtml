@@ -1,0 +1,131 @@
+﻿@model MixedUseProperty.Models.MixProperty
+<p> </p>
+<div class="col-xs-12">
+
+    <fieldset>
+        <div style="border:1px solid black;">
+
+
+
+
+            <svg width="250" height="120">
+
+                <rect width="100%" height="100%" style="fill:blue;stroke-width:3;stroke:rgb(0,0,0)" />
+                <text x="30%" y="50%" fill="white">Cabin1</text>
+            </svg>
+
+            <svg width="250" height="120">
+
+                <rect width="100%" height="100%" style="fill:blue;stroke-width:3;stroke:rgb(0,0,0)" />
+                <text x="30%" y="50%" fill="white">Cabin2</text>
+            </svg>
+
+            <svg width="250" height="120">
+
+                <rect width="100%" height="100%" style="fill:blue;stroke-width:3;stroke:rgb(0,0,0)" />
+                <text x="30%" y="50%" fill="white">Cabin3</text>
+            </svg>
+
+            <svg width="250" height="120">
+
+                <rect width="100%" height="100%" style="fill:blue;stroke-width:3;stroke:rgb(0,0,0)" />
+                <text x="30%" y="50%" fill="white">Cabin4</text>
+            </svg>
+
+
+
+            @for (int i = 0; i < 2; i++)
+            {
+
+                <svg width="500" height="120">
+
+                    <rect width="100%" height="100%" style="fill:green;stroke-width:3;stroke:rgb(0,0,0)" />
+                    <text x="30%" y="50%" fill="white">Meeting Room @i</text>
+                </svg>
+            }
+
+            <svg width="250" height="120">
+
+                <rect width="100%" height="100%" style="fill:blue;stroke-width:3;stroke:rgb(0,0,0)" />
+                <text x="30%" y="50%" fill="white">Cabin5</text>
+            </svg>
+
+            <svg width="250" height="120">
+
+                <rect width="100%" height="100%" style="fill:blue;stroke-width:3;stroke:rgb(0,0,0)" />
+                <text x="30%" y="50%" fill="white">Cabin6</text>
+            </svg>
+
+            <svg width="250" height="120">
+
+                <rect width="100%" height="100%" style="fill:blue;stroke-width:3;stroke:rgb(0,0,0)" />
+                <text x="30%" y="50%" fill="white">Cabin7</text>
+            </svg>
+
+            <svg width="250" height="120">
+
+                <rect width="100%" height="100%" style="fill:blue;stroke-width:3;stroke:rgb(0,0,0)" />
+                <text x="30%" y="50%" fill="white">Cabin8</text>
+            </svg>
+
+        </div>
+    </fieldset>
+
+
+
+
+    <script type="text/javascript">
+
+    function fnDisplayFloorPlan(propid, siteid) {
+
+        $.ajax({
+            url: '@Url.Action("GetFloorDetails", "Home")',
+            data: JSON.stringify({ propid: propid, siteid: siteid }),
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (xhr, er, error) {
+
+            }
+
+
+        })
+    }
+    function fnReadSites(ddl) {
+
+        var PropID = ddl.value;
+        if (PropID == "") {
+            location.href = "Home\\NoLayout";
+        } else {
+            location.href = "Home\\PropLayout"
+        }
+
+        var options = "";
+        $.ajax({
+            url: '@Url.Action("GetSites", "Home")',
+            data: JSON.stringify({ PropID:PropID }),
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                NoofSites= data.mixes.length-1
+                for (var i = 0; i < data.mixes.length; i++) {
+
+                    options += "<option value = " + data.mixes[i].strSiteId + ">" + data.mixes[i].strSiteName + "</option>";
+                }
+
+                $('#Siteddl').html(options);
+            },
+            error: function (xhr, er, error) {
+
+            }
+        });
+
+    }
+
+    </script>
+
+
+    <div style="text-align:right;">
+        <a href="javascript:history.back()">Go Back</a>
+    </div>

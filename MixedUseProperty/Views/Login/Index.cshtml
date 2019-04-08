@@ -1,0 +1,51 @@
+﻿@model MixedUseProperty.Models.MixProperty
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_GuestLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spaces</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            GetURL();
+        });
+        function onLogin() {
+
+        }
+    </script>
+</head>
+<body>
+    
+    <div class="panel panel-default" id="EngFmyMastMain" style="margin-bottom:60px !important;">
+        
+        <div class="panel-heading" id="EngFmyMast">           
+            <span style="font-size:x-large">Login</span>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive col-md-12">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Login Id</label>
+                    <div class="col-xs-7">
+                        <input type="text" value="" class="form-control" id="txtLoginId">
+                    </div>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Password</label>
+                    <div class="col-xs-7">
+                        <input type="password" value="" class="form-control" id="txtPassword">
+                    </div>
+                    <div class="form-group pull-left" style="position:relative;top:0;">
+                        <input type="button" id="btnLogin" value="Login" class="btn btn-primary" title="Login" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

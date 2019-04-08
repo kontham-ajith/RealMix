@@ -1,0 +1,183 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Floor Plan</title>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/MixedUseProperty.js"></script>
+    <script src="~/Scripts/chart-2.7.1.min.js"></script>
+    <style>
+        .panel-info {
+            border-color: #293f50 !important;
+        }
+    </style>
+    <script type="text/javascript">
+        function GetURL() {
+            myMastUrl.AddProperty = '@Url.Action("AddProperty", "Property")'
+            myMastUrl.AddSite = '@Url.Action("AddSite", "Property")'
+        }
+        $(document).ready(function () {
+            var canvas = document.getElementById('myChart');
+            var data = {
+                labels: ["Jan", "Feb", "Mar", "Apr","May","Jun","July","Aug","Sep","Oct","Nov","Dec"],
+                datasets: [
+                    {
+                        label: "Occupany Rate",
+                        backgroundColor: "#3498db",
+                        borderColor: "rgba(255,99,132,1)",
+                        borderWidth: 2,
+                        hoverBackgroundColor: "#72d6ec",
+                        hoverBorderColor: "#a8deea",
+                        data: [93.75, 97, 98.5, 94, 95, 77, 94.5,95.4,93,94.5,98,92],
+                    }
+                ]
+            };
+            var option = {
+                showDatapoints: true,
+                title: {
+                    display: true,
+                    text: 'Occupany Rate vs Time Period'
+                },
+                scales: {
+                    yAxes: [{
+                        stacked: true,
+                        gridLines: {
+                            display: true,
+                            color: "rgba(255,99,132,0.2)"
+                        },
+                        ticks: {
+                            min: 0,
+                            callback: function (value, index, values) {
+                                if (Math.floor(value) === value) {
+                                    return value;
+                                }
+                            }
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            display: false
+                        }
+                    }]
+                }
+            };
+            var myBarChart = Chart.Bar(canvas, {
+                data: data,
+                options: option,
+                showInlineValues: true,
+                showInlineValues: true,
+                centeredInllineValues: true,
+            });
+
+            //var ctx = document.getElementById("myChart1").getContext('2d');
+            //var myChart = new Chart(ctx, {
+            //    type: 'pie',
+            //    options: {
+            //        title: {
+            //            display: true,
+            //            text: 'No occupancy'
+            //        }
+            //    },
+            //    data: {
+            //        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+            //        datasets: [{
+            //            backgroundColor: [
+            //                "#2ecc71",
+            //                "#3498db",
+            //                "#95a5a6",
+            //                "#9b59b6",
+            //                "#f1c40f",
+            //                "#e74c3c"
+            //            ],
+            //            data: [30, 36.5, 10, 5, 26, 14]
+            //        }]
+            //    }
+            //});
+
+        });
+    </script>
+</head>
+<body>
+    <div class="panel panel-info" id="EngFmyMastMain" style="margin-bottom:60px !important;">
+        <div id="EngFmyMast" style="text-align:center;background: linear-gradient(to bottom, #ff6600 0%, #ff9933 100%);">
+            <img src="~/Content/Images/CHART1.png" style="width:100%;text-align:center;" />
+        </div>
+        <hr />
+
+        <div class="panel-body">
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-xs-4">
+                        <label class="control-label">Property Name </label>
+
+                        <select class="form-control">
+                            <option>Orchard 11894</option>
+                            <option>Greystar Real Estate Partners</option>
+                            <option>Riverstone Residential Group</option>
+                            <option>Lincoln Property Company</option>
+                            <option>Pinnacle</option>
+                        </select>
+
+                    </div>
+
+                    <div class="col-xs-3">
+                        <label class="control-label">Select Site </label>
+
+                        <select class="form-control">
+                        @*    <option>Select</option>*@
+                            <option>432 Park Avenue</option>
+                            <option>220 Central Park South</option>
+                            <option>111 Murray Street</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-2">
+                        <label class="control-label">Period From </label>
+
+                        <select class="form-control">
+                            @*<option>Select</option>*@
+                            <option>2016</option>
+                            <option>2017</option>
+                            <option selected>2018</option>
+                            <option>2019</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-3">
+                        <label class="control-label">Period To </label>
+                        <select class="form-control">
+                            @*<option>Select</option>*@
+                            <option>2016</option>
+                            <option>2017</option>
+                            <option selected>2018</option>
+                            <option>2019</option>
+                        </select>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <hr />
+            <div class="col-md-12 panel-body" ">
+                <div class="col-md-6">
+                    <canvas id="myChart" width="400" height="300"></canvas>
+                </div>
+                <div class="col-md-6 panel-body modal-body">
+                    <img src="/Content/Images/Piechart1.jpg" style="width:100%" />
+                    @*<canvas id="myChart1" width="400" height="300"></canvas>*@
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>
+
+

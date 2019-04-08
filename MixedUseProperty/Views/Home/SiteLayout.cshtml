@@ -1,0 +1,130 @@
+﻿
+<br />
+
+<h3>Property Name : Orchard 11894  &nbsp;   -  &nbsp; Site Name : 432 Park Avenue</h3>
+
+
+
+
+<br />
+<fieldset>
+    <div style="border:1px solid black;">
+
+        @{
+
+            int[] SpaceTypes = { 1, 2, 3 };
+
+            string[] SpaceTypeName = { "Apartment", "Office", "Parking" };
+
+            string[] SpaceColor = { "Purple", "Blue", "Green", "Purple" };
+
+            // int[] SpaceUnits = { };
+            int[] SpaceUnits = { 2, 1, 8 };
+
+            int[][] SpaceQty = new int[][]{
+            new int[] { 1000, 2000},
+            new int[] { 300 },
+            new int[] { 400,300,200,120, 400, 300, 200, 120}
+    };
+
+
+            decimal SpaceHeigh = 250 / SpaceTypes.Length;
+
+
+        }
+
+        @for (int i = 0; i < SpaceTypes.Length; i++)
+        {
+
+            <div style="text-align:center;">
+                <p></p>
+
+
+                @if (SpaceUnits.Length > 0)
+                {
+                    double SpaceWidth = (1.0 / SpaceUnits[i]) * 100;
+
+                    <div>
+                        @SpaceTypeName[i]
+                    </div>
+                    <br />
+
+                    for (int j = 0; j < SpaceUnits[i]; j++)
+                    {
+
+                        if (i == 0)
+                        {
+                            if (i == 2)
+                            {
+                                <svg width="@SpaceWidth%" height="@SpaceHeigh">
+                                    <rect width="100%" height="100%" style="fill:@SpaceColor[i];stroke-width:3;stroke:rgb(0,0,0)" />
+                                    <text x="30%" y="50%" fill="white">@SpaceQty[i][j] Sq.ft</text>
+                                </svg>
+                            }
+                            else
+                            {
+                                <svg width="@SpaceWidth%" height="@SpaceHeigh">
+                                    <a xlink:href="@Url.Action("UnitLayout", "Home")">
+                                        <rect width="100%" height="100%" style="fill:@SpaceColor[i];stroke-width:3;stroke:rgb(0,0,0)" />
+                                        <text x="30%" y="50%" fill="white">@SpaceQty[i][j] Sq.ft</text>
+                                    </a>
+                                </svg>
+                            }
+                        }
+                        else
+                        {
+                            if (i == 2)
+                            {
+                                <svg width="@SpaceWidth%" height="@SpaceHeigh">
+                                    <rect width="100%" height="100%" style="fill:@SpaceColor[i];stroke-width:3;stroke:rgb(0,0,0)" />
+                                    <text x="30%" y="50%" fill="white">@SpaceQty[i][j] Sq.ft</text>
+                                </svg>
+                            }
+                            else
+                            {
+                                <svg width="@SpaceWidth%" height="@SpaceHeigh">
+                                    <a xlink:href="@Url.Action(@SpaceTypeName[i]+"UnitLayout", "Home")">
+                                        <rect width="100%" height="100%" style="fill:@SpaceColor[i];stroke-width:3;stroke:rgb(0,0,0)" />
+                                        <text x="30%" y="50%" fill="white">@SpaceQty[i][j] Sq.ft</text>
+                                    </a>
+                                </svg>
+                            }
+                        }
+
+                    }
+                }
+                else
+                {
+                    double SpaceWidth = 100;
+                    if (i == 2)
+                    {
+                        string SpaceWidth1 = "100%";
+                        string SpaceHeigh1 = "100%";
+                        <svg width="@SpaceWidth1" height="@SpaceHeigh1">
+                            <rect width="100%" height="100%" style="fill:@SpaceColor[i];stroke-width:3;stroke:rgb(0,0,0)" />
+                            <text x="30%" y="50%" fill="white">@SpaceTypeName[i]</text>
+                        </svg>
+
+                    }
+                    else
+                    {
+                        <svg width="@SpaceWidth%" height="@SpaceHeigh">
+                            <rect width="100%" height="100%" style="fill:@SpaceColor[i];stroke-width:3;stroke:rgb(0,0,0)" />
+                            <text x="30%" y="50%" fill="white">@SpaceTypeName[i]</text>
+                        </svg>
+
+                    }
+
+
+                }
+
+            </div>
+
+        }
+    </div>
+</fieldset>
+
+<div style="text-align:right;">
+    <a href="javascript:history.back()">Go Back</a>
+</div>
+

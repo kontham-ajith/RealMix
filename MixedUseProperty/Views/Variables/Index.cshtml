@@ -1,0 +1,180 @@
+﻿@model MixedUseProperty.Models.MixProperty
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spaces</title>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            GetURL();
+        });
+        function GetURL() {
+            myMastUrl.AddVariable = '@Url.Action("AddVariable", "Variables")'
+
+        }
+        function addVariable() {
+            var varName = $("#txtVarName").val().trim();
+            var varType = $("#ddlVarType").val().trim();
+            var varForm = $("#ddlForm").val().trim();
+
+            var VarData = {
+                VarName: varName,
+                VarType: varType,
+                Form: varForm
+            }
+            $.ajax({
+                url: '@Url.Action("AddVariable", "Variables")',
+                data: JSON.stringify(VarData),
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    $('#btnAddVariable').attr("disabled", false);
+                    if (data.message == "Variable Added") {
+                        alert("Variable Added Successfully.");
+                        $(location).attr('href', '/Variables');
+                    } else {
+                        alert(data.message);
+                        return false;
+                    }
+                },
+                error: function (xhr, er, error) {
+                    $('#btnAddVariable').attr("disabled", false);
+                    if (err == "") {
+                        alert("Variable Added Successfully.");
+                        $(location).attr('href', '/Variables');
+                    }
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+    <div class="panel panel-info" id="EngFmyMastMain" style="margin-bottom:60px !important;">
+        <div class="panel-heading" id="EngFmyMast">
+            Variables
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive col-md-12">
+                <div style="margin-bottom: 5px;" class="AddNewUserDiv pull-left">
+                    <a class="btn btn-success" data-toggle="modal" data-target="#NewEngineFamily" title="Add New Engine Family">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </div>
+                <table id="dtFloorData" class="display table table-striped table-bordered dt-responsive nowrap no-footer dtr-inline dataTable" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                Variable ID
+                            </th>
+
+                            <th>
+                                Variable Name
+                            </th>
+                            <th>
+                                Variable Type
+                            </th>
+                            <th>
+                                Form Name
+                            </th>
+                            @*<th>
+                                    Action
+                                </th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (MixedUseProperty.Models.MixProperty.dtProperty != null && MixedUseProperty.Models.MixProperty.dtProperty.Rows.Count > 0)
+                        {
+                            foreach (System.Data.DataRow row in MixedUseProperty.Models.MixProperty.dtProperty.Rows)
+                            {
+                                <tr>
+                                    @foreach (System.Data.DataColumn col in MixedUseProperty.Models.MixProperty.dtProperty.Columns)
+                                    {
+                                        <td>
+                                            @row[col.ColumnName]
+                                        </td>
+                                    }
+                                    @*<td>
+                                            Edit
+                                        </td>*@
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+                <div class="modal fade" id="NewEngineFamily" tabindex="-1" role="dialog" aria-labelledby="NewEngineFamilyLabel"
+                     data-backdrop="static" data-keyboard="false">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="Close"
+                                        id="iconFrmClose">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title" id="NewTurnabckLabel">
+                                    Add Variable
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-12" style="border: solid red 0px;">
+                                        <form class="form-horizontal" action="" method="post" id="frmNewEngineFamilyModel">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Variable Name </label>
+                                                <div class="col-xs-7">
+                                                    <input type="text" value="" class="form-control" id="txtVarName">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Variable Type </label>
+                                                <div class="col-xs-7">
+                                                    <select id="ddlVarType">
+                                                        <option value="Text">
+                                                            Text
+                                                        </option>
+                                                        <option value="DDL">
+                                                            DDL
+                                                        </option>
+                                                        <option value="MultiText">
+                                                            Multi Text
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Form Name(s) </label>
+                                                <div class="col-xs-7">
+                                                    <select id="ddlForm">
+                                                        <option>Property</option>
+                                                        <option>Property - Space</option>
+                                                        <option>Space</option>
+                                                        <option>User</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <input type="button" class="btn btn-default" data-dismiss="modal" value="Close" title="Close"
+                                                       id="btnFrmClose" />
+                                                <input type="button" id="btnAddVariable" value="Add" class="btn btn-primary" title="Add Property" onclick="addVariable()" />
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

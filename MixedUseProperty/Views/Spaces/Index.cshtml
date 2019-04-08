@@ -1,0 +1,115 @@
+﻿@model MixedUseProperty.Models.MixProperty
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spaces</title>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/MixedUseProperty.js"></script>
+    <script type="text/javascript">
+        function GetURL() {
+            myMastUrl.AddSpace = '@Url.Action("AddSpace", "Spaces")'
+
+        }
+
+
+    </script>
+
+</head>
+<body>
+    <div class="panel panel-info" id="EngFmyMastMain" style="margin-bottom:60px !important;">
+        <div class="panel-heading" id="EngFmyMast">
+            Space
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive col-md-12">
+                <div style="margin-bottom: 5px;" class="AddNewUserDiv pull-left">
+                    <a class="btn btn-success" data-toggle="modal" data-target="#NewEngineFamily" title="Add New Engine Family">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </div>
+                <table id="dtFloorData" class="display table table-striped table-bordered dt-responsive nowrap no-footer dtr-inline dataTable" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                Space ID
+                            </th>
+                            <th>
+                                Space Name
+                            </th>
+                            <th>
+                                Created By
+                            </th>
+                            <th>
+                                Created Date
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (MixedUseProperty.Models.MixProperty.dtSpace != null && MixedUseProperty.Models.MixProperty.dtSpace.Rows.Count > 0)
+                        {
+                            foreach (System.Data.DataRow row in MixedUseProperty.Models.MixProperty.dtSpace.Rows)
+                            {
+                                <tr>
+                                    @foreach (System.Data.DataColumn col in MixedUseProperty.Models.MixProperty.dtSpace.Columns)
+                                    {
+                                        <td>
+                                            @row[col.ColumnName]
+                                        </td>
+                                    }
+                                    <td>
+                                        Edit
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+                <div class="modal fade" id="NewEngineFamily" tabindex="-1" role="dialog" aria-labelledby="NewEngineFamilyLabel"
+                     data-backdrop="static" data-keyboard="false">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="Close"
+                                        id="iconFrmClose">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title" id="NewTurnabckLabel">
+                                    Add Space
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-12" style="border: solid red 0px;">
+                                        <form class="form-horizontal" action="" method="post" id="frmNewEngineFamilyModel">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Space Name </label>
+                                                <div class="col-xs-7">
+                                                    <input type="text" value="" class="form-control" id="txtSpaceName">
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <input type="button" class="btn btn-default" data-dismiss="modal" value="Close" title="Close"
+                                                       id="btnFrmClose" />
+                                                <input type="button" id="btnAddSpace" value="Add" class="btn btn-primary" title="Add Property" onclick="addSpace()" />
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

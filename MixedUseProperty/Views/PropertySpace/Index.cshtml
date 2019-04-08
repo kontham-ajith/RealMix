@@ -1,0 +1,493 @@
+﻿@model MixedUseProperty.Models.MixProperty
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spaces</title>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#office").click(function () {
+                $("#officeFP").toggle();
+            });
+        });
+
+        $(document).ready(function () {
+            $("#apartment").click(function () {
+                $("#apartmentFP").toggle();
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <div class="panel panel-info" id="EngFmyMastMain" style="margin-bottom:60px !important;">
+        <div class="panel-heading" id="EngFmyMast">
+            Property - Space<br />
+            Add space details of your property
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive col-md-12">
+                @*<div style="margin-bottom: 5px;" class="AddNewUserDiv pull-left">
+                        <a class="btn btn-success" data-toggle="modal" data-target="#NewEngineFamily" title="Add New Engine Family">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </div>*@
+                <div class="row">
+                    <div class="col-xs-12 col-md-12" style="border: solid red 0px;">
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Property</label>
+                            <div class="col-xs-7">
+                                <select id="ddlProperty" class="form-control">
+                                    <option value="Select">Orchard 11894</option>
+                                    <option>The Old Rectory 2500</option>
+
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Site</label>
+                            <div class="col-xs-7">
+                                <select id="ddlProperty" class="form-control">
+                                    @*<option value="Select"></option>*@
+                                    <option value="">30 Hudson Yards</option>
+                                    <option selected value="">432 Park Avenue</option>
+                                    <option value="">
+                                        Bank of America Plaza
+                                    </option>
+                                    <option value="">70 Pine Street</option>
+                                    <option value="">220 Central Park South</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Associated Spaces</label>
+                            <div class="col-xs-7">
+                                <textarea id="txtAssociatedSpace">Office, Apartment</textarea>
+
+
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"></label>
+                            <div class="col-xs-7">
+                                @*<a href="" target="_blank">History of space usage</a>*@
+                                <a href="~/Content/Data/Historic_Space_Usage.xlsx" target="_blank">History of space usage</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div style="margin-bottom: 5px;" class="AddNewUserDiv">
+                        @*<a class="btn btn-success" data-toggle="" data-target="" title="Add Space Details">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </a>*@
+                    </div>
+                    @*<div class="form-group">
+                            <label class="col-sm-3 control-label">Select Space(s)<br /></label>
+                            <div class="col-xs-7">
+                                @*<select>
+                                        <option><input type="checkbox" checked /> Office</option>
+                                        <option><input type="checkbox" checked /> Apartment</option>
+                                    </select>
+                                @Html.ListBox("Space", new SelectList(new[]
+                           {
+                               new { ID = "1", Name = "Office" },
+                               new { ID = "2", Name = "Apartment" }
+
+                           },
+                           "ID", "Name", 1))
+
+                            </div>
+                        </div>*@
+                </div>
+                <div id="office" class="h4">
+                    <b> Add Space Details (Office)</b>
+                </div>
+                <div id="officeFP">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Space Name</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="Office" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">No. of floors</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="1" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">No. of units per floor</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="1" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h4">
+                        <b> Unit 1 Floor Plan</b>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Unit Code</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="U1" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Unit Name</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="Park Avenue Unit1" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Floor plan name</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="U1-FP-A1" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Sq.ft</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="2250" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">No. of cabins</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="44" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">No. of Work stations</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="4040" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">No. of washrooms</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="18" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Cafetaria</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="4" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Parking space?</label>
+                            <div class="col-xs-7">
+
+                                <select>
+                                    <option selected>Yes</option>
+                                    <option>No</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">No. of parking lots</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="6" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Space Rate</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="5000" />
+
+                                <select>
+                                    <option selected>
+                                        USD
+                                    </option>
+                                    <option>
+                                        INR
+                                    </option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Transition date</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="04/10/2019" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Archive  this unit?</label>
+                            <div class="col-xs-7">
+                                <select>
+                                    <option>Yes</option>
+                                    <option selected>No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="row">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Archived date</label>
+                                <div class="col-xs-7">
+                                    <input type="text" />
+                                </div>
+                            </div>
+                        </div>*@
+                    <div class="row">
+                        <div class="form-group">
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Close" title="Close"
+                                   id="btnFrmClose" />
+                            <input type="button" id="btnAddProperty" value="Add" class="btn btn-primary" title="Add Property" onclick="addSpace()" />
+                        </div>
+                    </div>
+                    <table id="dtFloorData" class="display table table-striped table-bordered dt-responsive nowrap no-footer dtr-inline dataTable" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Unit Code
+                                </th>
+                                <th>
+                                    Unit Name
+                                </th>
+                                <th>
+                                    Floor Plan Name
+                                </th>
+                                <th>
+                                    Area (Sq Ft)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    U-1235
+                                </td>
+                                <td>
+                                    Unit 4
+                                </td>
+                                <td>
+                                    U1-1235- A1
+                                </td>
+                                <td>
+                                    3456
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div id="apartment" class="h4">
+                    <b> Add Space Details (Apartment)</b>
+                </div>
+                <div id="apartmentFP">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Space Name</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="Single Apartment" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">No. of floors</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="1" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">No. of units per floor</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="1" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h4">
+                        <b> Unit 1 Floor Plan</b>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Unit Code</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="U2" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Unit Name</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="Park Avenue Unit 2" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">(unit)- Floor plan name</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="U2-FP-A1" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Sq.ft</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="6000" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">No. of bedrooms</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="3" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">No. of halls</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="1" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">No. of bathrooms</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="3" />
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Parking space?</label>
+                            <div class="col-xs-7">
+                                <select>
+                                    <option>Yes</option>
+                                    <option selected>No</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @*<div class="form-group">
+                                <label class="col-sm-3 control-label">No. of parking lots</label>
+                                <div class="col-xs-7">
+                                    <input type="text" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Space Rate</label>
+                                <div class="col-xs-7">
+                                    <input type="text" />
+
+                                    <select>
+                                        <option>
+                                            USD
+                                        </option>
+                                        <option>
+                                            INR
+                                        </option>
+                                    </select>
+                                </div>
+
+                            </div>*@
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Transition date</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="04/10/2019" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Archive  this unit?</label>
+                            <div class="col-xs-7">
+                                <select>
+                                    <option selected>Yes</option>
+                                    <option>No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Archived date</label>
+                            <div class="col-xs-7">
+                                <input type="text" value="04/10/2019" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Close" title="Close"
+                                   id="btnFrmClose" />
+                            <input type="button" id="btnAddProperty" value="Add" class="btn btn-primary" title="Add Property" onclick="addSpace()" />
+                        </div>
+                    </div>
+                    <table id="dtFloorData" class="display table table-striped table-bordered dt-responsive nowrap no-footer dtr-inline dataTable" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Unit Code
+                                </th>
+                                <th>
+                                    Unit Name
+                                </th>
+                                <th>
+                                    Floor Plan Name
+                                </th>
+                                <th>
+                                    Area (Sq Ft)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    U-1225
+                                </td>
+                                <td>
+                                    Unit 9
+                                </td>
+                                <td>
+                                    U1-1225- A1
+                                </td>
+                                <td>
+                                    1234
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
